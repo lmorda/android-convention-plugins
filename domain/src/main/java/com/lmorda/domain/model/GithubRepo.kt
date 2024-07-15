@@ -1,4 +1,4 @@
-package com.lmorda.domain
+package com.lmorda.domain.model
 
 data class GithubRepo(
     val id: Int,

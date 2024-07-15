@@ -1,4 +1,4 @@
-package com.lmorda.domain
+package com.lmorda.domain.model
 
 data class Owner(
     val login: String,

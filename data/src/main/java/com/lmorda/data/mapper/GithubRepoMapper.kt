@@ -1,8 +1,8 @@
 package com.lmorda.data.mapper
 
 import com.lmorda.data.model.GithubRepoDto
-import com.lmorda.domain.GithubRepo
-import com.lmorda.domain.Owner
+import com.lmorda.domain.model.GithubRepo
+import com.lmorda.domain.model.Owner
 
 class GithubRepoMapper {
 
