@@ -28,6 +28,10 @@ retrofitSerialization = "1.0.0"
 turbine = "1.1.0"
 uiTestManifest = "1.6.8"
 uiTestJunit4 = "1.6.8"
+agp = "8.3.2"
+kotlinVersion = "1.9.0"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
 
 [libraries]
 android-tools-build-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -65,6 +69,8 @@ retrofit-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "uiTestManifest" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 
 [plugins]
 convention-application = { id = "convention.android.application", version = "unspecified" }
@@ -73,3 +79,5 @@ convention-core-lifecycle = { id = "convention.core.lifecycle", version = "unspe
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 convention-android-library = { id = "convention.android.library", version = "unspecified" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinxSerialization" }
+android-application = { id = "com.android.application", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }

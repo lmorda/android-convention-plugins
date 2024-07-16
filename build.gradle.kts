@@ -16,4 +16,6 @@ plugins {
     alias(libs.plugins.convention.compose) apply false
     alias(libs.plugins.convention.android.library) apply false
     alias(libs.plugins.convention.core.lifecycle) apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.jetbrains.kotlin.android) apply false
 }

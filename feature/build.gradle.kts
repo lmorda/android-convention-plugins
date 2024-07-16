@@ -9,6 +9,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":design"))
     implementation(project(":domain"))
     implementation(libs.compose.glide)
     androidTestImplementation(libs.androidx.ui.test.junit4)

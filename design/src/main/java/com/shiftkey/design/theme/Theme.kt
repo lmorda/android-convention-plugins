@@ -1,4 +1,4 @@
-package com.lmorda.convention.ui.theme
+package com.shiftkey.design.theme
 
 import android.app.Activity
 import android.os.Build

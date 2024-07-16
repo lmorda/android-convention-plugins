@@ -14,9 +14,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.lmorda.convention.ui.theme.ConventionTheme
 import com.lmorda.feature.FeatureScreen
 import com.lmorda.feature.FeatureViewModel
+import com.shiftkey.design.theme.ConventionTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

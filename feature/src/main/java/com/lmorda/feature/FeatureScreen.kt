@@ -21,6 +21,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.lmorda.domain.model.GithubRepo
 import com.lmorda.domain.model.mockDomainData
+import com.shiftkey.design.theme.ConventionTheme
 
 @Composable
 fun FeatureScreen(
@@ -37,7 +38,7 @@ fun FeatureScreen(
                     .width(120.dp)
                     .padding(8.dp)
             ) {
-                SampleGridItem(details = details)
+                FeatureGridItem(details = details)
             }
         }
     }
@@ -45,7 +46,7 @@ fun FeatureScreen(
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun SampleGridItem(details: GithubRepo) {
+fun FeatureGridItem(details: GithubRepo) {
     Column {
         Row(
             modifier = Modifier
@@ -81,10 +82,12 @@ fun SampleGridItem(details: GithubRepo) {
 @Preview
 @Composable
 fun FeatureScreenPreview() {
-    FeatureScreen(
-        state = FeatureUiState(
-            isLoading = false,
-            githubRepos = mockDomainData,
-        ),
-    )
+    ConventionTheme {
+        FeatureScreen(
+            state = FeatureUiState(
+                isLoading = false,
+                githubRepos = mockDomainData,
+            ),
+        )
+    }
 }

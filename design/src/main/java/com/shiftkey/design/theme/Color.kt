@@ -1,4 +1,4 @@
-package com.lmorda.convention.ui.theme
+package com.shiftkey.design.theme
 
 import androidx.compose.ui.graphics.Color
 
