@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.lmorda.domain.model.GithubRepo
-import com.lmorda.domain.model.Owner
+import com.lmorda.domain.model.mockDomainData
 
 @Composable
 fun FeatureScreen(
@@ -37,9 +37,7 @@ fun FeatureScreen(
                     .width(120.dp)
                     .padding(8.dp)
             ) {
-                SampleGridItem(
-                    details = details
-                )
+                SampleGridItem(details = details)
             }
         }
     }
@@ -86,28 +84,7 @@ fun FeatureScreenPreview() {
     FeatureScreen(
         state = FeatureUiState(
             isLoading = false,
-            githubRepos = listOf(
-                GithubRepo(
-                    id = 0,
-                    name = "my-application",
-                    fullName = "My Application",
-                    owner = Owner("lmorda", ""),
-                    description = "A quick and dirty sample of some fun Kotlin DSL modularization stuff",
-                    stargazersCount = 345123,
-                    language = "kotlin",
-                    forksCount = 99,
-                ),
-                GithubRepo(
-                    id = 1,
-                    name = "my-application-2",
-                    fullName = "My Application 2",
-                    owner = Owner("lmorda", ""),
-                    description = "This is just some garbage test data",
-                    stargazersCount = 345345,
-                    language = "kotlin",
-                    forksCount = 234,
-                ),
-            )
-        )
+            githubRepos = mockDomainData,
+        ),
     )
 }

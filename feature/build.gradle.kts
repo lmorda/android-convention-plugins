@@ -11,4 +11,6 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(libs.compose.glide)
+    androidTestImplementation(libs.androidx.ui.test.junit4)
+    debugImplementation(libs.ui.test.manifest)
 }

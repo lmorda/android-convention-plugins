@@ -24,6 +24,12 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             dependencies {
                 add("implementation", libs.findLibrary("hilt.android").get())
                 add("kapt", libs.findLibrary("hilt.compiler").get())
+                add("testImplementation", libs.findLibrary("junit").get())
+                add("testImplementation", libs.findLibrary("kotlinx.coroutines.test").get())
+                add("testImplementation", libs.findLibrary("mockk").get())
+                add("testImplementation", libs.findLibrary("mockk.android").get())
+                add("testImplementation", libs.findLibrary("androidx.core.testing").get())
+                add("testImplementation", libs.findLibrary("turbine").get())
             }
         }
     }
