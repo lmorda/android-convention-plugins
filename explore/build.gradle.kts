@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.lmorda.feature"
+    namespace = "com.lmorda.explore"
 }
 
 dependencies {

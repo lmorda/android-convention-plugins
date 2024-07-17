@@ -1,4 +1,4 @@
-package com.lmorda.feature
+package com.lmorda.explore
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -7,7 +7,7 @@ import com.lmorda.domain.model.mockDomainData
 import org.junit.Rule
 import org.junit.Test
 
-class FeatureScreenTest {
+class ExploreScreenTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
@@ -16,7 +16,7 @@ class FeatureScreenTest {
     fun featureScreenTest() {
         composeTestRule.setContent {
             FeatureScreen(
-                state = FeatureUiState(
+                state = ExploreUiState(
                     isLoading = false,
                     githubRepos = mockDomainData,
                 ),

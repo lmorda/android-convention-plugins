@@ -14,9 +14,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.lmorda.feature.FeatureScreen
-import com.lmorda.feature.FeatureViewModel
-import com.shiftkey.design.theme.ConventionTheme
+import com.lmorda.explore.FeatureScreen
+import com.lmorda.explore.ExploreViewModel
+import com.lmorda.design.theme.ConventionTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,10 +41,10 @@ fun MyApp() {
         val navController = rememberNavController()
         NavHost(
             navController,
-            startDestination = "feature",
+            startDestination = "explore",
         ) {
-            composable("feature") {
-                val viewModel: FeatureViewModel = hiltViewModel()
+            composable("explore") {
+                val viewModel: ExploreViewModel = hiltViewModel()
                 val state by viewModel.state.collectAsState()
                 FeatureScreen(state)
             }

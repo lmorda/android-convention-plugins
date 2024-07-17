@@ -1,4 +1,4 @@
-package com.shiftkey.design.theme
+package com.lmorda.design.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

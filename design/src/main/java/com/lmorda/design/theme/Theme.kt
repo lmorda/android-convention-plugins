@@ -1,4 +1,4 @@
-package com.shiftkey.design.theme
+package com.lmorda.design.theme
 
 import android.app.Activity
 import android.os.Build

@@ -1,4 +1,4 @@
-package com.lmorda.feature
+package com.lmorda.explore
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,12 +11,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FeatureViewModel @Inject constructor(
+class ExploreViewModel @Inject constructor(
     private val repository: DataRepository
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(FeatureUiState())
-    val state: StateFlow<FeatureUiState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(ExploreUiState())
+    val state: StateFlow<ExploreUiState> = _state.asStateFlow()
 
     init {
         viewModelScope.launch {

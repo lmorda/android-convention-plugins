@@ -1,4 +1,4 @@
-package com.lmorda.feature
+package com.lmorda.explore
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
@@ -19,7 +19,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class FeatureViewModelTest {
+class ExploreViewModelTest {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -27,7 +27,7 @@ class FeatureViewModelTest {
     private val testDispatcher = StandardTestDispatcher()
 
     private val repository: DataRepository = mockk()
-    private lateinit var viewModel: FeatureViewModel
+    private lateinit var viewModel: ExploreViewModel
 
     @Before
     fun setUp() {
@@ -42,11 +42,11 @@ class FeatureViewModelTest {
     @Test
     fun viewModelTest() = runTest {
         coEvery { repository.getRepos() } returns mockDomainData
-        viewModel = FeatureViewModel(repository)
+        viewModel = ExploreViewModel(repository)
         viewModel.state.test {
-            assertEquals(FeatureUiState(isLoading = false), awaitItem())
-            assertEquals(FeatureUiState(isLoading = true), awaitItem())
-            assertEquals(FeatureUiState(isLoading = false, githubRepos = mockDomainData), awaitItem())
+            assertEquals(ExploreUiState(isLoading = false), awaitItem())
+            assertEquals(ExploreUiState(isLoading = true), awaitItem())
+            assertEquals(ExploreUiState(isLoading = false, githubRepos = mockDomainData), awaitItem())
         }
     }
 }

@@ -25,5 +25,5 @@ rootProject.name = "Convention"
 include(":app")
 include(":data")
 include(":domain")
-include(":feature")
+include(":explore")
 include(":design")
