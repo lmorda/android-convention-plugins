@@ -14,7 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.lmorda.explore.FeatureScreen
+import com.lmorda.explore.ExploreScreen
 import com.lmorda.explore.ExploreViewModel
 import com.lmorda.design.theme.ConventionTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +46,7 @@ fun MyApp() {
             composable("explore") {
                 val viewModel: ExploreViewModel = hiltViewModel()
                 val state by viewModel.state.collectAsState()
-                FeatureScreen(state)
+                ExploreScreen(state)
             }
         }
     }

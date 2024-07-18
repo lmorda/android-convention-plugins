@@ -2,17 +2,23 @@ package com.lmorda.explore
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -30,30 +36,44 @@ import com.lmorda.domain.model.mockDomainData
 import com.lmorda.design.theme.ConventionTheme
 
 @Composable
-fun FeatureScreen(
+fun ExploreScreen(
     state: ExploreUiState,
 ) {
-    // TODO: Hookup isLoading
-    Column(modifier = Modifier.background(color = Color.White)) {
-        Text(
-            modifier = Modifier.padding(all = 16.dp),
-            text = "Explore",
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-        )
+    Column(modifier = Modifier.background(color = Color.White).fillMaxSize()) {
+        Row {
+            Text(
+                modifier = Modifier.padding(all = 16.dp),
+                text = "Explore",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+            )
+        }
         HorizontalDivider(
             modifier = Modifier.shadow(2.dp),
             color = Color.Gray.copy(alpha = 0.5f),
             thickness = 1.dp,
         )
-        LazyColumn {
-            items(state.githubRepos) { details ->
-                FeatureListItem(details = details)
-                HorizontalDivider(
-                    modifier = Modifier.shadow(2.dp),
-                    color = Color.Gray.copy(alpha = 0.5f),
-                    thickness = 1.dp,
+        if (state.isLoading) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier.width(64.dp),
+                    color = MaterialTheme.colorScheme.secondary,
+                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
                 )
+            }
+        } else {
+            LazyColumn {
+                items(state.githubRepos) { details ->
+                    ExploreListItem(details = details)
+                    HorizontalDivider(
+                        modifier = Modifier.shadow(2.dp),
+                        color = Color.Gray.copy(alpha = 0.5f),
+                        thickness = 1.dp,
+                    )
+                }
             }
         }
     }
@@ -61,7 +81,7 @@ fun FeatureScreen(
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun FeatureListItem(details: GithubRepo) {
+fun ExploreListItem(details: GithubRepo) {
     Column(modifier = Modifier
         .padding(all = 16.dp)
         .background(color = Color.White)
@@ -114,9 +134,9 @@ fun FeatureListItem(details: GithubRepo) {
 
 @Preview
 @Composable
-fun FeatureScreenPreview() {
+fun ExploreScreenPreview() {
     ConventionTheme {
-        FeatureScreen(
+        ExploreScreen(
             state = ExploreUiState(
                 isLoading = false,
                 githubRepos = mockDomainData,
@@ -124,3 +144,18 @@ fun FeatureScreenPreview() {
         )
     }
 }
+
+
+@Preview
+@Composable
+fun ExploreScreenPreviewLoading() {
+    ConventionTheme {
+        ExploreScreen(
+            state = ExploreUiState(
+                isLoading = true,
+                githubRepos = emptyList(),
+            ),
+        )
+    }
+}
+

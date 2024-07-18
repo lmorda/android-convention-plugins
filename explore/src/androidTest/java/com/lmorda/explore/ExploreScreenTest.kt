@@ -15,7 +15,7 @@ class ExploreScreenTest {
     @Test
     fun featureScreenTest() {
         composeTestRule.setContent {
-            FeatureScreen(
+            ExploreScreen(
                 state = ExploreUiState(
                     isLoading = false,
                     githubRepos = mockDomainData,
