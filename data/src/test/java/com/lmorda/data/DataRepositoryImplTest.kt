@@ -15,7 +15,7 @@ class DataRepositoryImplTest {
 
     @Test
     fun `getRepos should return mapped repos`() = runTest {
-        coEvery { mockApiService.getRepos("lmorda") } returns mockApiData
+        coEvery { mockApiService.getMostStarredGoogleRepos() } returns mockApiData
         val repos = dataRepository.getRepos()
         assertEquals(mockDomainData, repos)
     }

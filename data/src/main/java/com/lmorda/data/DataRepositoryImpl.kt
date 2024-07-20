@@ -2,6 +2,7 @@ package com.lmorda.data
 
 import com.lmorda.data.mapper.GithubRepoMapper
 import com.lmorda.domain.DataRepository
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,6 +14,13 @@ class DataRepositoryImpl @Inject constructor(
     private val githubRepoMapper = GithubRepoMapper()
 
     override suspend fun getRepos() =
-        githubApiService.getRepos("lmorda").map(githubRepoMapper::map)
-
+        try {
+            githubRepoMapper.map(
+                githubApiService
+                    .getMostStarredGoogleRepos()
+            )
+        } catch (ex: Exception) {
+            Timber.e(ex)
+            emptyList()
+        }
 }

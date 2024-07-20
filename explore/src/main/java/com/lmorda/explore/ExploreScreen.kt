@@ -13,8 +13,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,11 +43,15 @@ import com.lmorda.design.theme.ConventionTheme
 fun ExploreScreen(
     state: ExploreUiState,
 ) {
-    Column(modifier = Modifier.background(color = Color.White).fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .background(color = Color.White)
+            .fillMaxSize()
+    ) {
         Row {
             Text(
                 modifier = Modifier.padding(all = 16.dp),
-                text = "Explore",
+                text = "Google Github Repositories",
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
             )
@@ -82,9 +90,10 @@ fun ExploreScreen(
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ExploreListItem(details: GithubRepo) {
-    Column(modifier = Modifier
-        .padding(all = 16.dp)
-        .background(color = Color.White)
+    Column(
+        modifier = Modifier
+            .padding(all = 16.dp)
+            .background(color = Color.White)
     ) {
         Row(
             modifier = Modifier
@@ -122,13 +131,53 @@ fun ExploreListItem(details: GithubRepo) {
                 )
             }
         }
-        Text(
-            text = details.description,
-            fontSize = 16.sp,
-            color = Color.DarkGray,
-            maxLines = 6,
-            overflow = TextOverflow.Ellipsis,
-        )
+        if (details.description.isNotBlank()) {
+            Text(
+                text = details.description,
+                fontSize = 16.sp,
+                color = Color.DarkGray,
+                maxLines = 6,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+        Row(
+            modifier = Modifier.padding(top = 12.dp),
+        ) {
+            Icon(
+                imageVector = Icons.Default.Star,
+                contentDescription = null,
+                tint = Color(0xFFFFD700),
+            )
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = "${formatNumber(details.stargazersCount)} Stargazers",
+                fontSize = 16.sp,
+                color = Color.DarkGray,
+            )
+        }
+        Row(
+            modifier = Modifier.padding(top = 8.dp),
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Build,
+                contentDescription = null,
+                tint = Color(0xFF3DDC84),
+            )
+            Text(
+                modifier = Modifier.padding(start = 8.dp),
+                text = "${formatNumber(details.forksCount)} Forks under construction",
+                fontSize = 16.sp,
+                color = Color.DarkGray,
+            )
+        }
+    }
+}
+
+private fun formatNumber(value: Int): String {
+    return when {
+        value >= 1_000_000 -> "${"%.1f".format(value / 1_000_000.0)}M"
+        value >= 1_000 -> "${"%.1f".format(value / 1_000.0)}k"
+        else -> value.toString()
     }
 }
 
