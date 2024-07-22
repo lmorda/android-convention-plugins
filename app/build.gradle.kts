@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.convention.application)
     alias(libs.plugins.convention.compose)
-    alias(libs.plugins.convention.core.lifecycle)
 }
 
 android {
