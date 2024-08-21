@@ -7,19 +7,17 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
-@Suppress("UnstableApiUsage")
 internal fun Project.configureCompose(commonExtension: BaseExtension) {
     commonExtension.apply {
         buildFeatures.apply {
             compose = true
         }
 
-        val libs: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
-
-        composeOptions {
-            kotlinCompilerExtensionVersion =
-                libs.findVersion("androidxComposeCompiler").get().toString()
+        with(pluginManager) {
+            apply("org.jetbrains.kotlin.plugin.compose")
         }
+
+        val libs: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
         dependencies {
             add("implementation", platform(libs.findLibrary("androidx.compose.bom").get()))

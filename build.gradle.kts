@@ -1,4 +1,3 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
         google()
@@ -10,6 +9,7 @@ buildscript {
         classpath(libs.hilt.android.gradle.plugin)
     }
 }
+
 plugins {
     alias(libs.plugins.jetbrainsKotlinJvm) apply false
     alias(libs.plugins.convention.application) apply false
@@ -18,4 +18,5 @@ plugins {
     alias(libs.plugins.convention.core.lifecycle) apply false
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }
