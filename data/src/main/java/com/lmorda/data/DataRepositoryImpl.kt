@@ -9,9 +9,8 @@ import javax.inject.Singleton
 @Singleton
 class DataRepositoryImpl @Inject constructor(
     private val githubApiService: ApiService,
+    private val githubRepoMapper: GithubRepoMapper,
 ) : DataRepository {
-
-    private val githubRepoMapper = GithubRepoMapper()
 
     override suspend fun getRepos() =
         try {
