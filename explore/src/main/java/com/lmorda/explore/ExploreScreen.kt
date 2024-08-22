@@ -1,5 +1,6 @@
 package com.lmorda.explore
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -26,18 +27,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.lmorda.domain.model.GithubRepo
 import com.lmorda.domain.model.mockDomainData
 import com.lmorda.design.theme.ConventionTheme
+import com.lmorda.design.theme.Green80
+import com.lmorda.design.theme.Yellow80
+import com.lmorda.design.theme.marginDefault
+import com.lmorda.design.theme.marginMedium
+import com.lmorda.design.theme.marginXLarge
 
 @Composable
 fun ExploreScreen(
@@ -45,135 +49,177 @@ fun ExploreScreen(
 ) {
     Column(
         modifier = Modifier
-            .background(color = Color.White)
+            .background(color = MaterialTheme.colorScheme.background)
             .fillMaxSize()
     ) {
         Row {
             Text(
-                modifier = Modifier.padding(all = 16.dp),
-                text = "Google Github Repositories",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
+                modifier = Modifier.padding(all = marginDefault),
+                text = stringResource(id = R.string.explore_title),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onBackground,
             )
         }
-        HorizontalDivider(
-            modifier = Modifier.shadow(2.dp),
-            color = Color.Gray.copy(alpha = 0.5f),
-            thickness = 1.dp,
-        )
-        if (state.isLoading) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center,
-            ) {
-                CircularProgressIndicator(
-                    modifier = Modifier.width(64.dp),
-                    color = MaterialTheme.colorScheme.secondary,
-                    trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                )
-            }
-        } else {
-            LazyColumn {
-                items(state.githubRepos) { details ->
-                    ExploreListItem(details = details)
-                    HorizontalDivider(
-                        modifier = Modifier.shadow(2.dp),
-                        color = Color.Gray.copy(alpha = 0.5f),
-                        thickness = 1.dp,
-                    )
-                }
-            }
+        ExploreDivider()
+        when {
+            state.isLoading -> ExploreProgressIndicator()
+            else -> ExploreItems(state)
         }
     }
 }
 
-@OptIn(ExperimentalGlideComposeApi::class)
+@Composable
+private fun ExploreDivider() {
+    HorizontalDivider(
+        modifier = Modifier.shadow(
+            elevation = 1.dp,
+            spotColor = MaterialTheme.colorScheme.onBackground,
+        ),
+        color = MaterialTheme.colorScheme.outlineVariant,
+        thickness = 1.dp,
+    )
+}
+
+@Composable
+private fun ExploreItems(state: ExploreUiState) {
+    LazyColumn {
+        items(state.githubRepos) { details ->
+            ExploreListItem(details = details)
+            ExploreDivider()
+        }
+    }
+}
+
+@Composable
+private fun ExploreProgressIndicator() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+    ) {
+        CircularProgressIndicator(
+            modifier = Modifier.width(width = marginXLarge),
+            color = MaterialTheme.colorScheme.secondary,
+            trackColor = MaterialTheme.colorScheme.surfaceVariant,
+        )
+    }
+}
+
 @Composable
 fun ExploreListItem(details: GithubRepo) {
     Column(
         modifier = Modifier
-            .padding(all = 16.dp)
-            .background(color = Color.White)
+            .padding(all = marginDefault)
+            .background(color = MaterialTheme.colorScheme.background)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp)
-        ) {
-            val imageSize = 40.dp
-            details.owner.avatarUrl.takeIf { it.isNotBlank() }?.let {
-                GlideImage(
-                    modifier = Modifier
-                        .size(size = imageSize)
-                        .clip(shape = CircleShape),
-                    model = details.owner.avatarUrl,
-                    contentDescription = details.owner.avatarUrl,
-                )
-            } ?: Image(
-                modifier = Modifier.size(size = imageSize),
-                painter = painterResource(id = R.drawable.ic_android_black_24dp),
-                contentDescription = null,
+        ExploreItemTitle(details)
+        ExploreItemDescription(details.description)
+        ExploreItemStargazers(details.stargazersCount)
+        ExploreItemForks(details.forksCount)
+    }
+}
+
+@Composable
+@OptIn(ExperimentalGlideComposeApi::class)
+private fun ExploreItemTitle(details: GithubRepo) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = marginMedium)
+    ) {
+        details.owner.avatarUrl.takeIf { it.isNotBlank() }?.let {
+            GlideImage(
+                modifier = Modifier
+                    .size(size = 40.dp)
+                    .clip(shape = CircleShape),
+                model = details.owner.avatarUrl,
+                contentDescription = details.owner.avatarUrl,
             )
-            Column(modifier = Modifier.padding(start = 16.dp)) {
-                Text(
-                    text = details.name,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-                Text(
-                    text = details.owner.login,
-                    fontSize = 16.sp,
-                    color = Color.DarkGray,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                )
-            }
-        }
-        if (details.description.isNotBlank()) {
+        } ?: Image(
+            modifier = Modifier.size(size = 40.dp),
+            painter = painterResource(id = R.drawable.ic_android_green_24dp),
+            contentDescription = null,
+        )
+        Column(modifier = Modifier.padding(start = marginDefault)) {
             Text(
-                text = details.description,
-                fontSize = 16.sp,
-                color = Color.DarkGray,
-                maxLines = 6,
+                text = details.name,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-        }
-        Row(
-            modifier = Modifier.padding(top = 12.dp),
-        ) {
-            Icon(
-                imageVector = Icons.Default.Star,
-                contentDescription = null,
-                tint = Color(0xFFFFD700),
-            )
             Text(
-                modifier = Modifier.padding(start = 8.dp),
-                text = "${formatNumber(details.stargazersCount)} Stargazers",
-                fontSize = 16.sp,
-                color = Color.DarkGray,
-            )
-        }
-        Row(
-            modifier = Modifier.padding(top = 8.dp),
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Build,
-                contentDescription = null,
-                tint = Color(0xFF3DDC84),
-            )
-            Text(
-                modifier = Modifier.padding(start = 8.dp),
-                text = "${formatNumber(details.forksCount)} Forks under construction",
-                fontSize = 16.sp,
-                color = Color.DarkGray,
+                text = details.owner.login,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onBackground,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }
 }
 
-private fun formatNumber(value: Int): String {
+@Composable
+private fun ExploreItemDescription(description: String) {
+    if (description.isNotBlank()) {
+        Text(
+            text = description,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+            maxLines = 6,
+            overflow = TextOverflow.Ellipsis,
+        )
+    }
+}
+
+@Composable
+private fun ExploreItemForks(count: Int) {
+    Row(
+        modifier = Modifier.padding(top = 2.dp),
+    ) {
+        Icon(
+            imageVector = Icons.Filled.Build,
+            contentDescription = null,
+            tint = Green80,
+        )
+        Text(
+            modifier = Modifier
+                .padding(start = marginMedium)
+                .align(Alignment.CenterVertically),
+            text = stringResource(
+                R.string.forks_under_construction,
+                countPrettyString(count),
+            ),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+    }
+}
+
+@Composable
+private fun ExploreItemStargazers(count: Int) {
+    Row(
+        modifier = Modifier.padding(top = marginDefault),
+    ) {
+        Icon(
+            imageVector = Icons.Default.Star,
+            tint = Yellow80,
+            contentDescription = null,
+        )
+        Text(
+            modifier = Modifier
+                .padding(start = marginMedium)
+                .align(Alignment.CenterVertically),
+            text = stringResource(
+                id = R.string.stargazers,
+                countPrettyString(count),
+            ),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+    }
+}
+
+private fun countPrettyString(value: Int): String {
     return when {
         value >= 1_000_000 -> "${"%.1f".format(value / 1_000_000.0)}M"
         value >= 1_000 -> "${"%.1f".format(value / 1_000.0)}k"
@@ -181,7 +227,8 @@ private fun formatNumber(value: Int): String {
     }
 }
 
-@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ExploreScreenPreview() {
     ConventionTheme {
@@ -195,7 +242,8 @@ fun ExploreScreenPreview() {
 }
 
 
-@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ExploreScreenPreviewLoading() {
     ConventionTheme {
@@ -207,4 +255,3 @@ fun ExploreScreenPreviewLoading() {
         )
     }
 }
-
