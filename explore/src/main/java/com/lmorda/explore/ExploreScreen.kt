@@ -105,7 +105,7 @@ private fun ExploreProgressIndicator() {
 }
 
 @Composable
-fun ExploreListItem(details: GithubRepo) {
+private fun ExploreListItem(details: GithubRepo) {
     Column(
         modifier = Modifier
             .padding(all = marginDefault)
