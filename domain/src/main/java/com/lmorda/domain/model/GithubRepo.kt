@@ -1,7 +1,7 @@
 package com.lmorda.domain.model
 
 data class GithubRepo(
-    val id: Int,
+    val id: Long,
     val name: String,
     val fullName: String,
     val owner: Owner,

@@ -4,6 +4,8 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import com.lmorda.domain.model.mockDomainData
+import com.lmorda.explore.repos.ExploreScreen
+import com.lmorda.explore.repos.ExploreUiState
 import org.junit.Rule
 import org.junit.Test
 

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GithubRepoDto(
-    @SerialName("id") val id: Int,
+    @SerialName("id") val id: Long,
     @SerialName("name") val name: String?,
     @SerialName("full_name") val fullName: String?,
     @SerialName("owner") val owner: OwnerDto?,

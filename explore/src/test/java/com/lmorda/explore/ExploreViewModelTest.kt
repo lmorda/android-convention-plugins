@@ -4,6 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
 import com.lmorda.domain.DataRepository
 import com.lmorda.domain.model.mockDomainData
+import com.lmorda.explore.repos.ExploreUiState
+import com.lmorda.explore.repos.ExploreViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals

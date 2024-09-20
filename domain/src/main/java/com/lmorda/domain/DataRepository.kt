@@ -6,4 +6,5 @@ interface DataRepository {
 
     suspend fun getRepos(): List<GithubRepo>
 
+    suspend fun getRepo(id: Long): GithubRepo?
 }

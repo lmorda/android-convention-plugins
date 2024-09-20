@@ -1,4 +1,4 @@
-package com.lmorda.explore
+package com.lmorda.explore.repos
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -14,12 +14,19 @@ class DataRepositoryImpl @Inject constructor(
 
     override suspend fun getRepos() =
         try {
-            githubRepoMapper.map(
-                githubApiService
-                    .getMostStarredGoogleRepos()
-            )
+            val repos = githubApiService.getMostStarredGoogleRepos()
+            githubRepoMapper.map(githubRepoItemsDto = repos)
         } catch (ex: Exception) {
             Timber.e(ex)
             emptyList()
+        }
+
+    override suspend fun getRepo(id: Long) =
+        try {
+            val repo = githubApiService.getRepo(id = id)
+            githubRepoMapper.map(githubRepoDto = repo)
+        } catch (ex: Exception) {
+            Timber.e(ex)
+            null
         }
 }
