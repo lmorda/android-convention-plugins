@@ -2,16 +2,16 @@
 
 # Kotlin & Android
 androidGradlePlugin = "8.6.1"
-kotlin = "2.0.20"
-coreKtx = "1.13.1"
+kotlin = "2.1.0"
+coreKtx = "1.15.0"
 coroutines = "1.8.1"
 appcompat = "1.7.0"
-lifecycle = "2.8.5"
+lifecycle = "2.8.7"
 
 # Compose
-composeBom = "2024.09.01"
-activityCompose = "1.9.2"
-navigationCompose = "2.8.0"
+composeBom = "2024.11.00"
+activityCompose = "1.9.3"
+navigationCompose = "2.8.4"
 composeGlide = "1.0.0-beta01"
 
 # Testing
@@ -93,7 +93,7 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinxSerialization" }
 
 # Convention Plugins
-convention-application = { id = "convention.android.application", version = "unspecified" }
-convention-compose = { id = "convention.compose", version = "unspecified" }
-convention-core-lifecycle = { id = "convention.core.lifecycle", version = "unspecified" }
-convention-android-library = { id = "convention.android.library", version = "unspecified" }
+convention-application = { id = "convention.android.application" }
+convention-compose = { id = "convention.compose" }
+convention-core-lifecycle = { id = "convention.core.lifecycle" }
+convention-android-library = { id = "convention.android.library" }
