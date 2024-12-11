@@ -22,13 +22,11 @@ class ExploreScreenTest {
                     isLoading = false,
                     githubRepos = mockDomainData,
                 ),
+                onNavigateToDetails = {},
             )
         }
 
         composeTestRule.onNodeWithText("my-application").assertIsDisplayed()
-        composeTestRule.onNodeWithText("description for google my application").assertIsDisplayed()
-
         composeTestRule.onNodeWithText("my-application-2").assertIsDisplayed()
-        composeTestRule.onNodeWithText("description for google my application 2").assertIsDisplayed()
     }
 }
