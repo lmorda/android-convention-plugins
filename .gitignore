@@ -10,6 +10,7 @@ captures
 # Directories created after a build.
 build/
 app/build/
+.kotlin/
 
 #  Gradle cache directory.
 .gradle
