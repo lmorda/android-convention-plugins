@@ -17,16 +17,15 @@ class GithubRepoMapper @Inject constructor() {
         with(githubRepoDto) {
             GithubRepo(
                 id = id,
-                name = name ?: "",
-                fullName = fullName ?: "",
+                name = name,
                 owner = Owner(
-                    login = owner?.login ?: "",
-                    avatarUrl = owner?.avatarUrl ?: "",
+                    login = owner.login,
+                    avatarUrl = owner.avatarUrl,
                 ),
-                description = description ?: "",
-                stargazersCount = stargazersCount ?: 0,
-                language = language ?: "",
-                forksCount = forksCount ?: 0,
+                description = description,
+                stargazersCount = stargazersCount,
+                language = language,
+                forksCount = forksCount,
             )
         }
 }

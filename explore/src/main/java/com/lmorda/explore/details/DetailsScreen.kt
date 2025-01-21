@@ -52,9 +52,9 @@ fun DetailsScreen(
         }
         state.githubRepo?.let { details ->
             RepoItemTitle(details)
-            DetailsDescription(details.description)
-            DetailsStargazers(details.stargazersCount)
-            DetailsForks(details.forksCount)
+            details.description?.let { DetailsDescription(it) }
+            details.stargazersCount?.let { DetailsStargazers(it) }
+            details.forksCount?.let { DetailsForks(it) }
         }
     }
 }
