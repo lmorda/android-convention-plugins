@@ -29,17 +29,11 @@ internal fun RepoItemTitle(details: GithubRepo) {
             .fillMaxWidth()
             .padding(bottom = marginMedium)
     ) {
-        details.owner.avatarUrl.takeIf { it.isNotBlank() }?.let {
-            GlideImage(
-                modifier = Modifier
-                    .size(size = 40.dp)
-                    .clip(shape = CircleShape),
-                model = details.owner.avatarUrl,
-                contentDescription = "avatar",
-            )
-        } ?: Image(
-            modifier = Modifier.size(size = 40.dp),
-            painter = painterResource(id = R.drawable.ic_android_green_24dp),
+        GlideImage(
+            modifier = Modifier
+                .size(size = 40.dp)
+                .clip(shape = CircleShape),
+            model = details.owner.avatarUrl,
             contentDescription = "avatar",
         )
         Column(modifier = Modifier.padding(start = marginDefault)) {
